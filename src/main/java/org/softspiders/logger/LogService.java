@@ -6,4 +6,6 @@ public interface LogService {
 	List<LogWriter> getWriters();
 
 	void addWriter(LogWriter writer);
+
+	void removeWriter(LogWriter writer);
 }
