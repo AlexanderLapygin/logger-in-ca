@@ -5,7 +5,7 @@ import org.junit.Test;
 public class LoggerTest {
 
 	@Test
-	public void CalmDefaultCreation() {
+	public void CalmCreation() {
 		new Logger();
 	}
 
