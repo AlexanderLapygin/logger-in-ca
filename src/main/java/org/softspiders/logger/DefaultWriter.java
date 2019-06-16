@@ -7,4 +7,9 @@ public class DefaultWriter implements LogWriter {
 	@Override
 	public void log(String message) {
 	}
+
+	@Override
+	public Enum getLevel() {
+		return null;
+	}
 }

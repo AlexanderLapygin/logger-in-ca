@@ -5,4 +5,6 @@ package org.softspiders.logger;
  */
 public interface LogWriter {
 	void log(String message);
+
+	Enum getLevel();
 }

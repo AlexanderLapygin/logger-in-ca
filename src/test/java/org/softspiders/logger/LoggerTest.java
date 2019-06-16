@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.when;
 
 public class LoggerTest {
 
@@ -27,11 +28,9 @@ public class LoggerTest {
 	}
 
 	@Test
-	public void JustAfterLoggerCreationItsWriterListHasDefaultWriterOnly() {
+	public void JustAfterLoggerCreationItsWriterListIsEmpty() {
 		Logger logger = new Logger();
-		assertEquals(logger.getWriters().size(), 1);
-		LogWriter writer = logger.getWriters().get(0);
-		assertTrue(writer instanceof DefaultWriter);
+		assertEquals(logger.getWriters().size(), 0);
 	}
 
 	@Test
@@ -56,6 +55,7 @@ public class LoggerTest {
 	@Test
 	public void InfoCallsInfoWriter() {
 		LogWriter logWriterMock = Mockito.mock(LogWriter.class);
+		when(logWriterMock.getLevel()).thenReturn(LogLevels.INFO);
 		Logger logger = new Logger();
 		logger.addWriter(logWriterMock);
 		String message = "some message";
