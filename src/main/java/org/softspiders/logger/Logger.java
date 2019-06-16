@@ -1,17 +1,16 @@
 package org.softspiders.logger;
 
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Logger implements LogService {
-	List<Writer> writers = new ArrayList<Writer>();
+	List<LogWriter> writers = new ArrayList<>();
 
 	public Logger() {
 	}
 
 	@Override
-	public List<Writer> getWriters() {
+	public List<LogWriter> getWriters() {
 		return writers;
 	}
 }
