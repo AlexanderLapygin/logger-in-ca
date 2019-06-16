@@ -1,8 +1,9 @@
 package org.softspiders.logger;
 
 import org.junit.Test;
-
+import org.mockito.Mockito;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.times;
 
 public class LoggerTest {
 
@@ -52,9 +53,13 @@ public class LoggerTest {
 
 	// Logging: trace, debug, info, warn, error, fatal
 
-//	@Test
-//	public void TraceCallsTracedWriter() {
-//		Logger logger = new Logger();
-//		logger.trace("!!!");
-//	}
+	@Test
+	public void InfoCallsInfoWriter() {
+		LogWriter logWriterMock = Mockito.mock(LogWriter.class);
+		Logger logger = new Logger();
+		logger.addWriter(logWriterMock);
+		String message = "some message";
+		logger.info(message);
+		Mockito.verify(logWriterMock, times(1)).log(message);
+	}
 }

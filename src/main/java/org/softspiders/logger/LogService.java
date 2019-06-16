@@ -8,4 +8,6 @@ public interface LogService {
 	void addWriter(LogWriter writer);
 
 	void removeWriter(LogWriter writer);
+
+	void info(String message);
 }

@@ -24,5 +24,12 @@ public class Logger implements LogService {
 	public void removeWriter(LogWriter writer) {
 		writers.remove(writer);
 	}
+
+	@Override
+	public void info(String message) {
+		for(LogWriter logWriter: writers) {
+			logWriter.log(message);
+		}
+	}
 }
 
