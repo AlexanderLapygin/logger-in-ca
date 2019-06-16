@@ -18,5 +18,10 @@ public class Logger implements LogService {
 	public void addWriter(LogWriter writer) {
 		writers.add(writer);
 	}
+
+	@Override
+	public void removeWriter(LogWriter writer) {
+
+	}
 }
 
