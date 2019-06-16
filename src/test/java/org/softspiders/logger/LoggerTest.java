@@ -36,7 +36,7 @@ public class LoggerTest {
 	@Test
 	public void AddingWriterAddsItToTheWriterList() {
 		Logger logger = new Logger();
-		LogWriter writer = new DefaultWriter();
+		LogWriter writer = new DefaultWriter(); // any LogWriter
 		logger.addWriter(writer);
 		assertTrue(logger.getWriters().contains(writer));
 	}
@@ -44,7 +44,7 @@ public class LoggerTest {
 	@Test
 	public void RemovingWriterRemovesItFromTheWriterList() {
 		Logger logger = new Logger();
-		LogWriter writer = new DefaultWriter();
+		LogWriter writer = new DefaultWriter(); // any LogWriter
 		logger.addWriter(writer);
 		logger.removeWriter(writer);
 		assertFalse(logger.getWriters().contains(writer));
