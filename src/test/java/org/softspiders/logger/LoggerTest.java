@@ -23,6 +23,11 @@ public class LoggerTest {
 
 	@Test
 	public void JustAfterLoggerCreationItsWriterListIsNotNull() {
-		Assert.assertNotNull((new Logger()).getWriters());
+		assertNotNull((new Logger()).getWriters());
+	}
+
+	@Test
+	public void JustAfterLoggerCreationItsWriterListIsEmpty() {
+		assertEquals((new Logger()).getWriters().size(), 0);
 	}
 }
