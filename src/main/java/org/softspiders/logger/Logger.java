@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Logger implements LogService {
-	List<LogWriter> writers = new ArrayList<>();
+	private List<LogWriter> writers = new ArrayList<>();
 
 	public Logger() {
 	}
@@ -16,7 +16,7 @@ public class Logger implements LogService {
 
 	@Override
 	public void addWriter(LogWriter writer) {
-
+		writers.add(writer);
 	}
 }
 
