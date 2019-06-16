@@ -1,7 +1,8 @@
 package org.softspiders.logger;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import java.io.Writer;
 
 import static org.junit.Assert.*;
 
@@ -19,7 +20,7 @@ public class LoggerTest {
 		assertTrue(new Logger() instanceof LogService);
 	}
 
-	// Writers basic tests
+	// Tests related to Writers
 
 	@Test
 	public void JustAfterLoggerCreationItsWriterListIsNotNull() {
@@ -30,4 +31,12 @@ public class LoggerTest {
 	public void JustAfterLoggerCreationItsWriterListIsEmpty() {
 		assertEquals((new Logger()).getWriters().size(), 0);
 	}
+
+//	@Test
+//	public void AddingWriterAddsItToTheWriterList() {
+//		Logger logger = new Logger();
+//		LogWriter writer
+//		logger.addWriter();
+//		assertEquals(().getWriters().size(), 0);
+//	}
 }
