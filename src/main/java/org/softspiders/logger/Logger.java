@@ -21,7 +21,7 @@ public class Logger implements LogService {
 
 	@Override
 	public void removeWriter(LogWriter writer) {
-
+		writers.remove(writer);
 	}
 }
 
