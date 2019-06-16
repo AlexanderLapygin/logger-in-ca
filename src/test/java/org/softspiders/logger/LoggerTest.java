@@ -2,8 +2,6 @@ package org.softspiders.logger;
 
 import org.junit.Test;
 
-import java.io.Writer;
-
 import static org.junit.Assert.*;
 
 public class LoggerTest {
