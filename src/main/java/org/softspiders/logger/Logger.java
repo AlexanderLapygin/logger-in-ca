@@ -13,5 +13,10 @@ public class Logger implements LogService {
 	public List<LogWriter> getWriters() {
 		return writers;
 	}
+
+	@Override
+	public void addWriter(LogWriter writer) {
+
+	}
 }
 

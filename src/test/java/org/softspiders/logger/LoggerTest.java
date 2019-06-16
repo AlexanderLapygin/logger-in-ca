@@ -32,11 +32,11 @@ public class LoggerTest {
 		assertEquals((new Logger()).getWriters().size(), 0);
 	}
 
-//	@Test
-//	public void AddingWriterAddsItToTheWriterList() {
-//		Logger logger = new Logger();
-//		LogWriter writer
-//		logger.addWriter();
-//		assertEquals(().getWriters().size(), 0);
-//	}
+	@Test
+	public void AddingWriterAddsItToTheWriterList() {
+		Logger logger = new Logger();
+		LogWriter writer = new DefaultWriter();
+		logger.addWriter(writer);
+		assertTrue(logger.getWriters().contains(writer));
+	}
 }
