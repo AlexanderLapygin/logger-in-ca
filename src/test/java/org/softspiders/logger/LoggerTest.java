@@ -2,6 +2,8 @@ package org.softspiders.logger;
 
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 public class LoggerTest {
 
 	@Test
@@ -9,4 +11,8 @@ public class LoggerTest {
 		new Logger();
 	}
 
+	@Test
+	public void LoggerIsInstanceOfLogService() {
+		assertTrue(new Logger() instanceof LogService);
+	}
 }
