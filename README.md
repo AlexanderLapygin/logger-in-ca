@@ -1,2 +1,2 @@
 # logger-in-ca
-Logger on Pure Architecture
+Logger on Clean Architecture
