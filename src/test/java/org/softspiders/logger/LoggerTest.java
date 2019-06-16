@@ -9,8 +9,4 @@ public class LoggerTest {
 		new Logger();
 	}
 
-	@Test
-	public void CalmCreationWithOptions() {
-		new Logger(new LoggerOptions());
-	}
 }
