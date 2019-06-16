@@ -7,6 +7,7 @@ public class Logger implements LogService {
 	private List<LogWriter> writers = new ArrayList<>();
 
 	public Logger() {
+		writers.add(new DefaultWriter());
 	}
 
 	@Override

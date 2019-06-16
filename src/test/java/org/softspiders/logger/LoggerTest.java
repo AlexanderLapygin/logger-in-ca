@@ -18,7 +18,7 @@ public class LoggerTest {
 		assertTrue(new Logger() instanceof LogService);
 	}
 
-	// Writers: create, add, remove
+	// LogWriter: create, add, remove
 
 	@Test
 	public void JustAfterLoggerCreationItsWriterListIsNotNull() {
@@ -26,8 +26,11 @@ public class LoggerTest {
 	}
 
 	@Test
-	public void JustAfterLoggerCreationItsWriterListIsEmpty() {
-		assertEquals((new Logger()).getWriters().size(), 0);
+	public void JustAfterLoggerCreationItsWriterListHasDefaultWriterOnly() {
+		Logger logger = new Logger();
+		assertEquals(logger.getWriters().size(), 1);
+		LogWriter writer = logger.getWriters().get(0);
+		assertTrue(writer instanceof DefaultWriter);
 	}
 
 	@Test
@@ -35,10 +38,7 @@ public class LoggerTest {
 		Logger logger = new Logger();
 		LogWriter writer = new DefaultWriter();
 		logger.addWriter(writer);
-		LogWriter writer1 = new DefaultWriter();
-		logger.addWriter(writer1);
 		assertTrue(logger.getWriters().contains(writer));
-		assertTrue(logger.getWriters().contains(writer1));
 	}
 
 	@Test
@@ -46,12 +46,15 @@ public class LoggerTest {
 		Logger logger = new Logger();
 		LogWriter writer = new DefaultWriter();
 		logger.addWriter(writer);
-		LogWriter writer1 = new DefaultWriter();
-		logger.addWriter(writer1);
 		logger.removeWriter(writer);
 		assertFalse(logger.getWriters().contains(writer));
-		assertTrue(logger.getWriters().contains(writer1));
-		logger.removeWriter(writer1);
-		assertFalse(logger.getWriters().contains(writer1));
 	}
+
+	// Logging: trace, debug, info, warn, error, fatal
+
+//	@Test
+//	public void TraceCallsTracedWriter() {
+//		Logger logger = new Logger();
+//		logger.trace("!!!");
+//	}
 }
