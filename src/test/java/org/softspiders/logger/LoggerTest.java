@@ -18,7 +18,7 @@ public class LoggerTest {
 		assertTrue(new Logger() instanceof LogService);
 	}
 
-	// Tests related to Writers
+	// Writers: create, add, remove
 
 	@Test
 	public void JustAfterLoggerCreationItsWriterListIsNotNull() {
