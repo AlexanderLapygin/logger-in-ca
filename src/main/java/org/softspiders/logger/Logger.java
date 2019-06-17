@@ -22,7 +22,42 @@ public class Logger implements LogService {
 	}
 
 	@Override
+	public void trace(String message) {
+		for(LogWriter logWriter: writers) {
+			logWriter.log(message);
+		}
+	}
+
+	@Override
+	public void debug(String message) {
+		for(LogWriter logWriter: writers) {
+			logWriter.log(message);
+		}
+	}
+
+	@Override
 	public void info(String message) {
+		for(LogWriter logWriter: writers) {
+			logWriter.log(message);
+		}
+	}
+
+	@Override
+	public void warn(String message) {
+		for(LogWriter logWriter: writers) {
+			logWriter.log(message);
+		}
+	}
+
+	@Override
+	public void error(String message) {
+		for(LogWriter logWriter: writers) {
+			logWriter.log(message);
+		}
+	}
+
+	@Override
+	public void fatal(String message) {
 		for(LogWriter logWriter: writers) {
 			logWriter.log(message);
 		}
