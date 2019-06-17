@@ -24,42 +24,54 @@ public class Logger implements LogService {
 	@Override
 	public void trace(String message) {
 		for(LogWriter logWriter: writers) {
-			logWriter.log(message);
+			if(LogLevels.TRACE.equals(logWriter.getLevel())) {
+				logWriter.log(message);
+			}
 		}
 	}
 
 	@Override
 	public void debug(String message) {
 		for(LogWriter logWriter: writers) {
-			logWriter.log(message);
+			if(LogLevels.DEBUG.equals(logWriter.getLevel())) {
+				logWriter.log(message);
+			}
 		}
 	}
 
 	@Override
 	public void info(String message) {
 		for(LogWriter logWriter: writers) {
-			logWriter.log(message);
+			if(LogLevels.INFO.equals(logWriter.getLevel())) {
+				logWriter.log(message);
+			}
 		}
 	}
 
 	@Override
 	public void warn(String message) {
 		for(LogWriter logWriter: writers) {
-			logWriter.log(message);
+			if(LogLevels.WARN.equals(logWriter.getLevel())) {
+				logWriter.log(message);
+			}
 		}
 	}
 
 	@Override
 	public void error(String message) {
 		for(LogWriter logWriter: writers) {
-			logWriter.log(message);
+			if(LogLevels.ERROR.equals(logWriter.getLevel())) {
+				logWriter.log(message);
+			}
 		}
 	}
 
 	@Override
 	public void fatal(String message) {
 		for(LogWriter logWriter: writers) {
-			logWriter.log(message);
+			if(LogLevels.FATAL.equals(logWriter.getLevel())) {
+				logWriter.log(message);
+			}
 		}
 	}
 }

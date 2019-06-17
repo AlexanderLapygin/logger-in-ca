@@ -1,12 +1,42 @@
 package org.softspiders.logger;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class LoggerTest {
+	@Mock
+	LogWriter traceLogWriterMock;
+
+	@Mock
+	LogWriter debugLogWriterMock;
+
+	@Mock
+	LogWriter infoLogWriterMock;
+
+	@Mock
+	LogWriter warnLogWriterMock;
+
+	@Mock
+	LogWriter errorLogWriterMock;
+
+	@Mock
+	LogWriter fatalLogWriterMock;
+
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		when(traceLogWriterMock.getLevel()).thenReturn(LogLevels.TRACE);
+		when(debugLogWriterMock.getLevel()).thenReturn(LogLevels.DEBUG);
+		when(infoLogWriterMock.getLevel()).thenReturn(LogLevels.INFO);
+		when(warnLogWriterMock.getLevel()).thenReturn(LogLevels.WARN);
+		when(errorLogWriterMock.getLevel()).thenReturn(LogLevels.ERROR);
+		when(fatalLogWriterMock.getLevel()).thenReturn(LogLevels.FATAL);
+	}
 
 	// Creation tests
 
@@ -20,7 +50,7 @@ public class LoggerTest {
 		assertTrue(new Logger() instanceof LogService);
 	}
 
-	// LogWriter: create, add, remove
+	// LogWriters: create, add, remove
 
 	@Test
 	public void JustAfterLoggerCreationItsWriterListIsNotNull() {
@@ -36,42 +66,92 @@ public class LoggerTest {
 	@Test
 	public void AddingWriterAddsItToTheWriterList() {
 		Logger logger = new Logger();
-		LogWriter writer = new DefaultWriter(); // any LogWriter
-		logger.addWriter(writer);
-		assertTrue(logger.getWriters().contains(writer));
+		LogWriter anyWriter = traceLogWriterMock;
+		logger.addWriter(anyWriter);
+		assertTrue(logger.getWriters().contains(anyWriter));
 	}
 
 	@Test
 	public void RemovingWriterRemovesItFromTheWriterList() {
 		Logger logger = new Logger();
-		LogWriter writer = new DefaultWriter(); // any LogWriter
-		logger.addWriter(writer);
-		logger.removeWriter(writer);
-		assertFalse(logger.getWriters().contains(writer));
+		LogWriter anyWriter = traceLogWriterMock;
+		logger.addWriter(anyWriter);
+		logger.removeWriter(anyWriter);
+		assertFalse(logger.getWriters().contains(anyWriter));
 	}
 
-	// Logging: trace, debug, info, warn, error, fatal
+	// LogWriters invocations by: logger.trace, logger.debug, logger.info, logger.warn, logger.error, logger.fatal
+
+	@Test
+	public void TraceCallsTraceWriter() {
+		Logger logger = new Logger();
+		logger.addWriter(traceLogWriterMock);
+		String message = "trace message";
+		logger.trace(message);
+		verify(traceLogWriterMock, times(1)).log(message);
+	}
+
+	@Test
+	public void DebugCallsDebugWriter() {
+		Logger logger = new Logger();
+		logger.addWriter(debugLogWriterMock);
+		String message = "debug message";
+		logger.debug(message);
+		verify(debugLogWriterMock, times(1)).log(message);
+	}
 
 	@Test
 	public void InfoCallsInfoWriter() {
-		LogWriter logWriterMock = Mockito.mock(LogWriter.class);
-		when(logWriterMock.getLevel()).thenReturn(LogLevels.INFO);
 		Logger logger = new Logger();
-		logger.addWriter(logWriterMock);
-		String message = "some message";
+		logger.addWriter(infoLogWriterMock);
+		String message = "info message";
 		logger.info(message);
-		Mockito.verify(logWriterMock, times(1)).log(message);
+		verify(infoLogWriterMock, times(1)).log(message);
 	}
 
 	@Test
-	public void AllLevelCallsProduceCorrespondentWriterCalls() {
+	public void WarnCallsWarnWriter() {
 		Logger logger = new Logger();
-		LogWriter logTraceWriterMock = addLogWriter(logger, LogLevels.TRACE);
-		LogWriter logDebugWriterMock = addLogWriter(logger, LogLevels.DEBUG);
-		LogWriter logInfoWriterMock = addLogWriter(logger, LogLevels.INFO);
-		LogWriter logWarnWriterMock = addLogWriter(logger, LogLevels.WARN);
-		LogWriter logErrorWriterMock = addLogWriter(logger, LogLevels.ERROR);
-		LogWriter logFatalWriterMock = addLogWriter(logger, LogLevels.FATAL);
+		logger.addWriter(warnLogWriterMock);
+		String message = "warn message";
+		logger.warn(message);
+		verify(warnLogWriterMock, times(1)).log(message);
+	}
+
+	@Test
+	public void ErrorCallsErrorWriter() {
+		Logger logger = new Logger();
+		logger.addWriter(errorLogWriterMock);
+		String message = "error message";
+		logger.error(message);
+		verify(errorLogWriterMock, times(1)).log(message);
+	}
+
+	@Test
+	public void FatalCallsFatalWriter() {
+		Logger logger = new Logger();
+		logger.addWriter(fatalLogWriterMock);
+		String message = "fatal message";
+		logger.fatal(message);
+		verify(fatalLogWriterMock, times(1)).log(message);
+	}
+
+	@Test
+	public void EachLogLevelCallInMixProduceCorrespondentLogWriterCall() {
+		Logger logger = new Logger();
+
+		when(traceLogWriterMock.getLevel()).thenReturn(LogLevels.TRACE);
+		logger.addWriter(traceLogWriterMock);
+		when(debugLogWriterMock.getLevel()).thenReturn(LogLevels.DEBUG);
+		logger.addWriter(debugLogWriterMock);
+		when(infoLogWriterMock.getLevel()).thenReturn(LogLevels.INFO);
+		logger.addWriter(infoLogWriterMock);
+		when(warnLogWriterMock.getLevel()).thenReturn(LogLevels.WARN);
+		logger.addWriter(warnLogWriterMock);
+		when(errorLogWriterMock.getLevel()).thenReturn(LogLevels.ERROR);
+		logger.addWriter(errorLogWriterMock);
+		when(fatalLogWriterMock.getLevel()).thenReturn(LogLevels.FATAL);
+		logger.addWriter(fatalLogWriterMock);
 
 		logger.trace("message");
 
@@ -100,18 +180,11 @@ public class LoggerTest {
 		logger.fatal("message");
 		logger.fatal("message");
 
-		Mockito.verify(logTraceWriterMock, times(1)).log("message");
-		Mockito.verify(logDebugWriterMock, times(2)).log("message");
-		Mockito.verify(logInfoWriterMock, times(3)).log("message");
-		Mockito.verify(logWarnWriterMock, times(4)).log("message");
-		Mockito.verify(logErrorWriterMock, times(5)).log("message");
-		Mockito.verify(logFatalWriterMock, times(6)).log("message");
-	}
-
-	private LogWriter addLogWriter(Logger logger, LogLevels level) {
-		LogWriter logTraceWriterMock = Mockito.mock(LogWriter.class);
-		when(logTraceWriterMock.getLevel()).thenReturn(level);
-		logger.addWriter(logTraceWriterMock);
-		return logTraceWriterMock;
+		verify(traceLogWriterMock, times(1)).log("message");
+		verify(debugLogWriterMock, times(2)).log("message");
+		verify(infoLogWriterMock, times(3)).log("message");
+		verify(warnLogWriterMock, times(4)).log("message");
+		verify(errorLogWriterMock, times(5)).log("message");
+		verify(fatalLogWriterMock, times(6)).log("message");
 	}
 }
