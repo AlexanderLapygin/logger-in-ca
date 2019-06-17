@@ -10,5 +10,6 @@ The logger is selected as an example. It switches its behavior at runtime.
 Features:
 - Multiple log writers: console, files, ...
 - Filtering by log level: TRACE, DEBUG, INFO, WARN, ERROR, FATAL
-- Indepdent filtering for each log writer
+- Independent filtering for each log writer
+- Changing log writer's behavior at runtime
 - ...
