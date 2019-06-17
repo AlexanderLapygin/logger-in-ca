@@ -8,7 +8,7 @@ The logger is selected as an example.
 - Multiple log writers: console, files, ...
 - Filtering by log level: TRACE, DEBUG, INFO, WARN, ERROR, FATAL
 - Independent filtering for each log writer
-- Support for filters to be pluggable
+- Pluggable filters
 - Runtime-switching behavior
 - Logger's dashboard (?)
 - ...
