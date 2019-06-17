@@ -9,4 +9,5 @@ The logger is selected as an example.
 - Filtering by log level: TRACE, DEBUG, INFO, WARN, ERROR, FATAL
 - Independent filtering for each log writer
 - Runtime-switching behavior
+- Logger's dashboard (?)
 - ...
