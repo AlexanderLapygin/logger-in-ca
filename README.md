@@ -1,9 +1,9 @@
-#Logger on Clean Architecture
+# Logger on Clean Architecture
 
 The simplest (almost) example of Clean Architecture implementation.
 The logger implementation is selected as an example.
 
-##Features:
+## Features:
 - Multiple log writers: console, files, ...
 - Filtering by log level: TRACE, DEBUG, INFO, WARN, ERROR, FATAL
 - Independent filtering for each log writer
