@@ -23,53 +23,37 @@ public class Logger implements LogService {
 
 	@Override
 	public void trace(String message) {
-		for(LogWriter logWriter: writers) {
-			if(LogLevels.TRACE.equals(logWriter.getLevel())) {
-				logWriter.log(message);
-			}
-		}
+		callWritersByLevel(message, LogLevels.TRACE);
 	}
 
 	@Override
 	public void debug(String message) {
-		for(LogWriter logWriter: writers) {
-			if(LogLevels.DEBUG.equals(logWriter.getLevel())) {
-				logWriter.log(message);
-			}
-		}
+		callWritersByLevel(message, LogLevels.DEBUG);
 	}
 
 	@Override
 	public void info(String message) {
-		for(LogWriter logWriter: writers) {
-			if(LogLevels.INFO.equals(logWriter.getLevel())) {
-				logWriter.log(message);
-			}
-		}
+		callWritersByLevel(message, LogLevels.INFO);
 	}
 
 	@Override
 	public void warn(String message) {
-		for(LogWriter logWriter: writers) {
-			if(LogLevels.WARN.equals(logWriter.getLevel())) {
-				logWriter.log(message);
-			}
-		}
+		callWritersByLevel(message, LogLevels.WARN);
 	}
 
 	@Override
 	public void error(String message) {
-		for(LogWriter logWriter: writers) {
-			if(LogLevels.ERROR.equals(logWriter.getLevel())) {
-				logWriter.log(message);
-			}
-		}
+		callWritersByLevel(message, LogLevels.ERROR);
 	}
 
 	@Override
 	public void fatal(String message) {
+		callWritersByLevel(message, LogLevels.FATAL);
+	}
+
+	private void callWritersByLevel(String message, LogLevels logLevel) {
 		for(LogWriter logWriter: writers) {
-			if(LogLevels.FATAL.equals(logWriter.getLevel())) {
+			if(logLevel.equals(logWriter.getLevel())) {
 				logWriter.log(message);
 			}
 		}
