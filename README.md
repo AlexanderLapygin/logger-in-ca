@@ -1,6 +1,7 @@
 # Logger on Clean Architecture
 
 The attempt of simplest implementation of Clean Architecture.
+
 The logger is selected as an example.
 
 ## Logger's features:
